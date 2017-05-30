@@ -91,13 +91,17 @@ module Enumerable
   
   def my_count
     counter = 0
-    
-    self.my_each do |item|
-      result = yield item
-      
-      if result == true
-        counter += 1
+    if block_given?
+      self.my_each do |item|
+        result = yield item
+        
+        if result == true
+          counter += 1
+        end
       end
+    else
+      array = self.to_a
+      counter = array.length
     end
     
     counter
